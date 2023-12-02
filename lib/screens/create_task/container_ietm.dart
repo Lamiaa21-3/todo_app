@@ -55,7 +55,7 @@ class ContainerIetm extends StatelessWidget {
               TextMiddle(text: '$subText'),
             ]),
       ),
-      width: 327,
+      width: 375,
       height: 128,
       decoration: BoxDecoration(
         color: color,
