@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo/screens/add_task_screen/add_task_screen.dart';
 
+import '../../components/floatingActionButtonIetm.dart';
+
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
   DateTime today = DateTime.now();
@@ -61,17 +63,10 @@ class HomePageScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF8687E7),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddTaskScreen()));
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+
+      floatingActionButton: FloatingActionButtonIetm(onPressFunction: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen()));
+      },),
     );
   }
 }

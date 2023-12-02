@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../create_task/create_task_screen.dart';
 import 'add_task_component.dart';
 import 'add_task_container_color.dart';
+import 'add_task_container_date.dart';
 import 'add_task_container_row.dart';
 import 'add_task_text.dart';
 
@@ -45,36 +47,7 @@ class AddTaskScreen extends StatelessWidget {
               AddTaskText(
                 text: 'Date',
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Text(
-                        '9/7/2023',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Lato',
-                            fontSize: 16),
-                      ),
-                    ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.date_range),
-                    ),
-                  ],
-                ),
-                width: 400,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 1,
-                  ),
-                ),
-              ),
+              AddTaskContainerDate(),
               Row(
                 children: [
                   AddTaskText(
@@ -132,7 +105,9 @@ class AddTaskScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateTaskScreen()));
+                    },
                     child: AddTaskText(
                       text: 'Create task',
                     ),
