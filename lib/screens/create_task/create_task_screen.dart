@@ -19,8 +19,18 @@ class CreateTaskScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextDate(
-              text: 'October 2,2023',
+            Row(
+              children: [
+                TextMain(
+                  string: 'October 2,2023',
+                ),
+                Spacer(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_forward_ios_outlined))
+              ],
             ),
             TextMain(
               string: 'Today',

@@ -29,25 +29,31 @@ class AddTaskScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AddTaskText(
                 text: 'Title',
               ),
+              SizedBox(height: 10,),
               TextFormFieldComponent(
                 label: 'Enter title here',
               ),
+              SizedBox(height: 20,),
               AddTaskText(
                 text: 'Note',
               ),
+              SizedBox(height: 10,),
               TextFormFieldComponent(
                 label: 'Enter note here',
               ),
+              SizedBox(height: 20,),
               AddTaskText(
                 text: 'Date',
               ),
+              SizedBox(height: 10,),
               AddTaskContainerDate(),
+              SizedBox(height: 20,),
               Row(
                 children: [
                   AddTaskText(
@@ -61,6 +67,7 @@ class AddTaskScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 10,),
               Row(
                 children: [
                   AddTaskContainerRow(),
@@ -68,6 +75,7 @@ class AddTaskScreen extends StatelessWidget {
                   AddTaskContainerRow(),
                 ],
               ),
+              SizedBox(height: 20,),
               AddTaskText(
                 text: 'Color',
               ),

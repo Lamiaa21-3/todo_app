@@ -1,40 +1,86 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo/components/min_text.dart';
+import 'package:todo/components/text_small.dart';
 import 'package:todo/screens/add_task_screen/add_task_screen.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 
 import '../../components/floatingActionButtonIetm.dart';
+import '../../components/text_main.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   HomePageScreen({Key? key}) : super(key: key);
-  DateTime today = DateTime.now();
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
+  DateTime _selectedValue = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 15),
+        padding: const EdgeInsets.only(top: 50, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'October 2,2023',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Lato',
-                  fontSize: 16),
+            Row(
+              children: [
+                TextMain(
+                  string: 'October 2,2023',
+                ),
+                Spacer(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_forward_ios_outlined))
+              ],
             ),
-            Text(
-              'Today',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Lato',
-                  fontSize: 16),
+            SizedBox(
+              height: 15,
             ),
-            TableCalendar(
-              focusedDay: today,
-              firstDay: DateTime.utc(2010, 10, 12),
-              lastDay: DateTime.utc(2030, 3, 21),
+            TextDate(
+              text: 'Today',
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                DatePicker(
+                  DateTime.now(),
+                  height: 90,
+                  initialSelectedDate: DateTime.now(),
+                  selectionColor: Color(0xFF242969),
+                  selectedTextColor: Colors.white,
+                  monthTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Lato'),
+                  dayTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Lato'),
+                  dateTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Lato'),
+                  onDateChange: (date) {
+                    // New date selected
+                    setState(() {
+                      _selectedValue = date;
+                    });
+                  },
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(left: 70),
@@ -50,23 +96,25 @@ class HomePageScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400),
               ),
             ),
+            SizedBox(
+              height: 9,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 99),
-              child: Text(
-                'Tap + to add your tasks',
-                style: TextStyle(
-                    fontFamily: 'Lato',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
+              child: MinText(
+                minString: 'Tap + to add your tasks',
+                color: Colors.white,
               ),
             ),
           ],
         ),
       ),
-
-      floatingActionButton: FloatingActionButtonIetm(onPressFunction: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen()));
-      },),
+      floatingActionButton: FloatingActionButtonIetm(
+        onPressFunction: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddTaskScreen()));
+        },
+      ),
     );
   }
 }
