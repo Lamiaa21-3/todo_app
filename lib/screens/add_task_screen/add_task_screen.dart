@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../create_task/create_task_screen.dart';
 import 'add_task_component.dart';
@@ -7,12 +8,54 @@ import 'add_task_container_date.dart';
 import 'add_task_container_row.dart';
 import 'add_task_text.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({Key? key}) : super(key: key);
+class AddTaskScreen extends StatefulWidget {
+   AddTaskScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  final titleController = TextEditingController();
+
+  final timeController = TextEditingController();
+
+  final taskController = TextEditingController();
+
+   var scafoldKey = GlobalKey<ScaffoldState>();
+
+   final taskRef = Hive.box('Tasks');
+
+   void addTasks({required String title,
+
+     required String taskName}) async {
+     await taskRef.add({
+       'title': title,
+
+       'taskName': taskName,
+     });
+     getTask();
+   }
+  List<Map<String, dynamic>> taskDate = [];
+   void getTask() {
+     setState(() {
+       taskDate = taskRef.keys.map((e) {
+         final currentTask = taskRef.get(e);
+         return {
+           'key': e,
+           'title': currentTask['title'],
+           'time': currentTask['time'],
+           'taskName': currentTask['taskName'],
+         };
+       }).toList();
+       debugPrint('llllllll${taskDate.length}');
+     });
+   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scafoldKey,
       appBar: AppBar(
         elevation: 0,
         title: Text('Add Task',
@@ -37,7 +80,8 @@ class AddTaskScreen extends StatelessWidget {
               ),
               SizedBox(height: 10,),
               TextFormFieldComponent(
-                label: 'Enter title here',
+
+                label: 'Enter title here', controller: titleController,
               ),
               SizedBox(height: 20,),
               AddTaskText(
@@ -45,6 +89,7 @@ class AddTaskScreen extends StatelessWidget {
               ),
               SizedBox(height: 10,),
               TextFormFieldComponent(
+                controller: taskController,
                 label: 'Enter note here',
               ),
               SizedBox(height: 20,),
@@ -114,6 +159,19 @@ class AddTaskScreen extends StatelessWidget {
                   width: double.infinity,
                   child: MaterialButton(
                     onPressed: () {
+                      if (titleController.text.isNotEmpty &&
+
+                          taskController.text.isNotEmpty) {
+                        addTasks(
+                            title: titleController.text,
+
+                            taskName: taskController.text);
+
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('please enter the fields ')));
+                      }
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateTaskScreen()));
                     },
                     child: AddTaskText(

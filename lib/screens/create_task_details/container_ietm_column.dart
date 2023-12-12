@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContainerIetmColumn extends StatelessWidget {
-   ContainerIetmColumn({Key? key, required this.text, required this.color, this.onTapContaoner}) : super(key: key);
+    ContainerIetmColumn({Key? key, required this.text, required this.color, this.onTapContaoner}) : super(key: key);
  final String text;
  final Color color;
  final void Function()? onTapContaoner;

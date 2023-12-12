@@ -22,15 +22,13 @@ class CreateTaskDetailsScreen extends StatelessWidget {
                ContainerIetm(
                  mainText: 'Task 1',
                  subText: 'Learn Dart',
-                 color: Color(0xFFFF4666),
+                 color: const Color(0xFFFF4666),
                ),
-               // SizedBox(
-               //   height: 30,
-               // ),
+
                ContainerIetm(
                  mainText: 'Task 2',
                  subText: 'Learn SQFLITE ',
-                 color: Color(0xFFCC8441),
+                 color: const Color(0xFFCC8441),
                ),
                Container(
                  child: Padding(
@@ -38,9 +36,12 @@ class CreateTaskDetailsScreen extends StatelessWidget {
                    child: Column(
                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                      children: [
-                     ContainerIetmColumn(text: 'Task Completed ', color:  Color(0xFF8875FF),onTapContaoner: (){},),
-                       ContainerIetmColumn(text: 'Delete Task', color:  Color(0xFFE57373),onTapContaoner: (){}),
-                       ContainerIetmColumn(text: 'Cancel ', color:  Color(0xFF8875FF),onTapContaoner: (){
+                     ContainerIetmColumn(text: 'Task Completed ',
+                       color:  Color(0xFF8875FF),onTapContaoner: (){},),
+                       ContainerIetmColumn(text: 'Delete Task',
+                           color: Color(0xFFE57373),onTapContaoner: (){}),
+                       ContainerIetmColumn(text: 'Cancel ',
+                           color:  Color(0xFF8875FF),onTapContaoner: (){
                          Navigator.pop(context);
                        }),
                      ],
@@ -48,7 +49,7 @@ class CreateTaskDetailsScreen extends StatelessWidget {
                  ),
                  width: 375,
                  height: 240,
-                 decoration: BoxDecoration(
+                 decoration: const BoxDecoration(
                    color: Color(0xFF424242)
                  ),
                ),

@@ -20,18 +20,15 @@ class ContainerIetm extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return  Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ContainerIetmColumn(text: 'Task Completed ', color:  Color(0xFF8875FF),onTapContaoner: (){},),
-                      ContainerIetmColumn(text: 'Delete Task', color:  Color(0xFFE57373),onTapContaoner: (){}),
-                      ContainerIetmColumn(text: 'Cancel ', color:  Color(0xFF8875FF),onTapContaoner: (){
-                        Navigator.pop(context);
-                      }),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ContainerIetmColumn(text: 'Task Completed ', color:  Color(0xFF8875FF),onTapContaoner: (){},),
+                    ContainerIetmColumn(text: 'Delete Task', color:  Color(0xFFE57373),onTapContaoner: (){}),
+                    ContainerIetmColumn(text: 'Cancel ', color:  Color(0xFF8875FF),onTapContaoner: (){
+                      Navigator.pop(context);
+                    }),
+                  ],
                 ),
                 width: 375,
                 height: 240,
