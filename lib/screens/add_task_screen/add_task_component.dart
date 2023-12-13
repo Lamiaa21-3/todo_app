@@ -9,18 +9,29 @@ class TextFormFieldComponent extends StatelessWidget {
      required this.controller,
       this.suffixIconButton,
       this.function,
-      this.onTap})
+      this.onTap, this.onSaved})
       : super(key: key);
   final String label;
   final IconData? suffixIconButton;
   final void Function()? function;
   final void Function()? onTap;
   TextEditingController? controller;
+  final void Function(String?)? onSaved ;
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (value){
+        if(value?.isEmpty ?? true)
+          {
+            return ' field is required';
+          }
+        else{
+          return null;
+        }
+      },
+      onSaved: onSaved,
       controller: controller,
       onTap: onTap,
       decoration: InputDecoration(
