@@ -6,7 +6,7 @@ class TextFormFieldComponent extends StatelessWidget {
   TextFormFieldComponent(
       {Key? key,
       required this.label,
-     required this.controller,
+
       this.suffixIconButton,
       this.function,
       this.onTap, this.onSaved})
@@ -15,7 +15,7 @@ class TextFormFieldComponent extends StatelessWidget {
   final IconData? suffixIconButton;
   final void Function()? function;
   final void Function()? onTap;
-  TextEditingController? controller;
+ // TextEditingController? controller;
   final void Function(String?)? onSaved ;
 
 
@@ -32,7 +32,7 @@ class TextFormFieldComponent extends StatelessWidget {
         }
       },
       onSaved: onSaved,
-      controller: controller,
+      //controller: controller,
       onTap: onTap,
       decoration: InputDecoration(
           suffixIcon: GestureDetector(

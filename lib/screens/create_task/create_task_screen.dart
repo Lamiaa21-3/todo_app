@@ -18,43 +18,43 @@ class CreateTaskScreen extends StatefulWidget {
 
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
-  List<Map<String, dynamic>> taskDate = [];
-  bool bottomOpened = false;
+  // List<Map<String, dynamic>> taskDate = [];
+  // bool bottomOpened = false;
+  //
+  // final taskRef = Hive.box('Tasks');
+  //
+  // void addTasks({required String title,
+  //   required String time,
+  //   required String taskName}) async {
+  //   await taskRef.add({
+  //     'title': title,
+  //     'time': time,
+  //     'taskName': taskName,
+  //   });
+  //   getTask();
+  // }
+  //
+  // void getTask() {
+  //   setState(() {
+  //     taskDate = taskRef.keys.map((e) {
+  //       final currentTask = taskRef.get(e);
+  //       return {
+  //         'key': e,
+  //         'title': currentTask['title'],
+  //         'time': currentTask['time'],
+  //         'taskName': currentTask['taskName'],
+  //       };
+  //     }).toList();
+  //     debugPrint('llllllll${taskDate.length}');
+  //   });
+  // }
 
-  final taskRef = Hive.box('Tasks');
-
-  void addTasks({required String title,
-    required String time,
-    required String taskName}) async {
-    await taskRef.add({
-      'title': title,
-      'time': time,
-      'taskName': taskName,
-    });
-    getTask();
-  }
-
-  void getTask() {
-    setState(() {
-      taskDate = taskRef.keys.map((e) {
-        final currentTask = taskRef.get(e);
-        return {
-          'key': e,
-          'title': currentTask['title'],
-          'time': currentTask['time'],
-          'taskName': currentTask['taskName'],
-        };
-      }).toList();
-      debugPrint('llllllll${taskDate.length}');
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getTask();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getTask();
+  // }
 
 
 
@@ -94,7 +94,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: taskDate.length,
+                itemCount:12,
                 separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
                 itemBuilder: (BuildContext context, int index) {

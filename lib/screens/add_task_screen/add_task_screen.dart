@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:todo/cubit/add_task_cubit/task_cubit.dart';
-import 'package:todo/cubit/add_task_cubit/task_states.dart';
+import 'package:todo/cubit/add_task_cubit/add_task_cubit.dart';
+import 'package:todo/cubit/add_task_cubit/add_task_states.dart';
+import 'package:todo/models/task_models.dart';
 
 import '../create_task/create_task_screen.dart';
 import 'add_task_component.dart';
@@ -20,43 +21,43 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  final titleController = TextEditingController();
-
-  final timeController = TextEditingController();
-
-  final taskController = TextEditingController();
-
+  // final titleController = TextEditingController();
+  //
+  // final timeController = TextEditingController();
+  //
+  // final taskController = TextEditingController();
+  //
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final taskRef = Hive.box('Tasks');
+  //final taskRef = Hive.box('Tasks');
 
-  void addTasks({required String title, required String taskName}) async {
-    await taskRef.add({
-      'title': title,
-      'taskName': taskName,
-    });
-    getTask();
-  }
+  // void addTasks({required String title, required String taskName}) async {
+  //   await taskRef.add({
+  //     'title': title,
+  //     'taskName': taskName,
+  //   });
+  //   getTask();
+  // }
 
-  List<Map<String, dynamic>> taskDate = [];
-
-  void getTask() {
-    setState(() {
-      taskDate = taskRef.keys.map((e) {
-        final currentTask = taskRef.get(e);
-        return {
-          'key': e,
-          'title': currentTask['title'],
-          'time': currentTask['time'],
-          'taskName': currentTask['taskName'],
-        };
-      }).toList();
-      debugPrint('llllllll${taskDate.length}');
-    });
-  }
-
+  // List<Map<String, dynamic>> taskDate = [];
+  //
+  // void getTask() {
+  //   setState(() {
+  //     taskDate = taskRef.keys.map((e) {
+  //       final currentTask = taskRef.get(e);
+  //       return {
+  //         'key': e,
+  //         'title': currentTask['title'],
+  //         'time': currentTask['time'],
+  //         'taskName': currentTask['taskName'],
+  //       };
+  //     }).toList();
+  //     debugPrint('llllllll${taskDate.length}');
+  //   });
+  // }
+  //
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, subTitile;
+   String? title, subTitile;
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +76,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: SingleChildScrollView(
-          child: BlocConsumer<AddTaskCubit, AddTaskStates>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return ModalProgressHUD(
-                  inAsyncCall: state is AddTaskLoadingState ? true : false,
+        child: BlocConsumer<AddTaskCubit, AddTaskStates>(
+          listener: (context, state) {
+            if(state is AddTaskFailureState)
+              {
+                print('Failure ${state.errorMessage}');
+              }
+            if(state is AddTaskSuccessState) {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateTaskScreen()));
+
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+                inAsyncCall: state is AddTaskLoadingState ? true : false,
+                child: SingleChildScrollView(
                   child: Form(
                     autovalidateMode: autovalidateMode,
                     key: formKey,
@@ -98,7 +108,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             title = value;
                           },
                           label: 'Enter title here',
-                          controller: titleController,
+                          //controller: titleController,
                         ),
                         SizedBox(
                           height: 20,
@@ -113,7 +123,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           onSaved: (value) {
                             subTitile = value;
                           },
-                          controller: taskController,
+                         // controller: taskController,
                           label: 'Enter note here',
                         ),
                         SizedBox(
@@ -195,6 +205,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
+                                var  taskModel = TaskModel(title: title!,
+                                      subTitle: subTitile!,
+                                      date: DateTime.now().toString(),
+                                      color: Colors.blue.value);
+                                  BlocProvider.of<AddTaskCubit>(context)
+                                      .addTask(taskModel);
                                 } else {
                                   autovalidateMode = AutovalidateMode.always;
                                   setState(() {});
@@ -209,13 +225,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         )
                       ],
                     ),
-                  ));
+                  ),
+                ));
+          },
 
-
-              
-            },
-
-          ),
         ),
       ),
     );
