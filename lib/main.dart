@@ -7,6 +7,8 @@ import 'package:todo/screens/onBoarding_screen/onBoarding_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo/simple_bloc_observer/simple_bloc_obsever.dart';
 
+import 'cubit/task_cubit/task_cubit.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
  await Hive.initFlutter();
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=> AddTaskCubit())
+        BlocProvider(create: (context)=> AddTaskCubit()),
+        BlocProvider(create: (context)=> TaskCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
