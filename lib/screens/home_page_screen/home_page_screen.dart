@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+
 import 'package:todo/components/min_text.dart';
 import 'package:todo/components/text_small.dart';
 import 'package:todo/screens/add_task_screen/add_task_screen.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
+
 
 import '../../components/floatingActionButtonIetm.dart';
 import '../../components/text_main.dart';
@@ -52,34 +52,34 @@ class _HomePageScreenState extends State<HomePageScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                DatePicker(
-                  DateTime.now(),
-                  height: 90,
-                  initialSelectedDate: DateTime.now(),
-                  selectionColor: Color(0xFF242969),
-                  selectedTextColor: Colors.white,
-                  monthTextStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Lato'),
-                  dayTextStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Lato'),
-                  dateTextStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Lato'),
-                  onDateChange: (date) {
-                    // New date selected
-                    setState(() {
-                      _selectedValue = date;
-                    });
-                  },
-                ),
+                // DatePicker(
+                //   DateTime.now(),
+                //   height: 90,
+                //   initialSelectedDate: DateTime.now(),
+                //   selectionColor: Color(0xFF242969),
+                //   selectedTextColor: Colors.white,
+                //   monthTextStyle: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Lato'),
+                //   dayTextStyle: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Lato'),
+                //   dateTextStyle: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Lato'),
+                //   onDateChange: (date) {
+                //     // New date selected
+                //     setState(() {
+                //       _selectedValue = date;
+                //     });
+                //   },
+                // ),
               ],
             ),
             Padding(

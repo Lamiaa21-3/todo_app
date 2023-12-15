@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import '../../components/text_main.dart';
 import '../../components/text_middle.dart';
 import '../../components/text_small.dart';
+import '../../models/task_models.dart';
 import '../create_task_details/container_ietm_column.dart';
 
 
 class ContainerIetm extends StatelessWidget {
-   ContainerIetm({Key? key, required this.mainText, required this.subText, required this.color}) : super(key: key);
-   final String mainText;
-   final String subText;
-   final Color color;
+   ContainerIetm({Key? key, required this.taskModel,}) : super(key: key);
+   final TaskModel taskModel;
+   // final String mainText;
+  // final String subText;
+  // final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,12 @@ class ContainerIetm extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ContainerIetmColumn(text: 'Task Completed ', color:  Color(0xFF8875FF),onTapContaoner: (){},),
-                    ContainerIetmColumn(text: 'Delete Task', color:  Color(0xFFE57373),onTapContaoner: (){}),
+                    ContainerIetmColumn(text: 'Task Completed ', color:  Color(0xFF8875FF),onTapContaoner: (){
+
+                    },),
+                    ContainerIetmColumn(text: 'Delete Task', color:  Color(0xFFE57373),onTapContaoner: (){
+                      taskModel.delete();
+                    }),
                     ContainerIetmColumn(text: 'Cancel ', color:  Color(0xFF8875FF),onTapContaoner: (){
                       Navigator.pop(context);
                     }),
@@ -45,7 +51,7 @@ class ContainerIetm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextMain(
-                  string: '$mainText',
+                  string: '${taskModel.title}',
                 ),
                 Row(
                   children: [
@@ -54,7 +60,7 @@ class ContainerIetm extends StatelessWidget {
                       width: 9,
                     ),
                     TextDate(
-                      text: '09:33 PM - 09:48 PM',
+                      text:taskModel.date,
                     ),
                     SizedBox(
                       width: 90,
@@ -77,13 +83,13 @@ class ContainerIetm extends StatelessWidget {
                     )
                   ],
                 ),
-                TextMiddle(text: '$subText'),
+                TextMiddle(text: '${taskModel.subTitle}'),
               ]),
         ),
         width: 375,
         height: 128,
         decoration: BoxDecoration(
-          color: color,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(16),
         ),
       ),

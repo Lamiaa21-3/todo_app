@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/cubit/add_task_cubit/add_task_states.dart';
 
 import '../../cubit/add_task_cubit/add_task_cubit.dart';
@@ -149,15 +150,19 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+                        var currentDate = DateTime.now();
+                        var formatedDate = DateFormat.yMd().format(currentDate);
                         var  taskModel = TaskModel(title: title!,
                             subTitle: subTitile!,
-                            date: DateTime.now().toString(),
+                            date: formatedDate,
                             color: Colors.blue.value);
                         BlocProvider.of<AddTaskCubit>(context)
                             .addTask(taskModel);
                       } else {
                         autovalidateMode = AutovalidateMode.always;
-                        setState(() {});
+                        setState(() {
+
+                        });
                       }
                     },
                     child: AddTaskText(

@@ -14,7 +14,7 @@ void main() async{
  await Hive.initFlutter();
  Bloc.observer= SimpleBlocObsever();
   Hive.registerAdapter(TaskModelAdapter());
-await Hive.openBox(kTasksBox);
+await Hive.openBox<TaskModel>(kTasksBox);
 
   runApp(const MyApp());
 }
