@@ -16,6 +16,7 @@ class TaskCubit extends Cubit<TaskStates>{
      emit(TaskLoadingState());
      var taskBox =  Hive.box<TaskModel>(kTasksBox);
      tasks = taskBox.values.toList();
+     emit(TaskSucessState());
 
 
 
