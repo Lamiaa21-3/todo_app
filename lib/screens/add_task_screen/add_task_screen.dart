@@ -14,49 +14,8 @@ import 'add_task_container_row.dart';
 import 'add_task_text.dart';
 import 'form_ietm_screen.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  AddTaskScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
-  // final titleController = TextEditingController();
-  //
-  // final timeController = TextEditingController();
-  //
-  // final taskController = TextEditingController();
-  //
-
-
-  //final taskRef = Hive.box('Tasks');
-
-  // void addTasks({required String title, required String taskName}) async {
-  //   await taskRef.add({
-  //     'title': title,
-  //     'taskName': taskName,
-  //   });
-  //   getTask();
-  // }
-
-  // List<Map<String, dynamic>> taskDate = [];
-  //
-  // void getTask() {
-  //   setState(() {
-  //     taskDate = taskRef.keys.map((e) {
-  //       final currentTask = taskRef.get(e);
-  //       return {
-  //         'key': e,
-  //         'title': currentTask['title'],
-  //         'time': currentTask['time'],
-  //         'taskName': currentTask['taskName'],
-  //       };
-  //     }).toList();
-  //     debugPrint('llllllll${taskDate.length}');
-  //   });
-  // }
-  //
+class AddTaskScreen extends StatelessWidget {
+  AddTaskScreen({Key? key, }) : super(key: key);
 
 
   @override

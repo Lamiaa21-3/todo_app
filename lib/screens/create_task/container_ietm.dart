@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/cubit/add_task_cubit/add_task_cubit.dart';
 import 'package:todo/cubit/task_cubit/task_cubit.dart';
 
 import '../../components/text_main.dart';
@@ -102,7 +103,7 @@ class ContainerIetm extends StatelessWidget {
         width: 375,
         height: 128,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color:Color(taskModel.color),
           borderRadius: BorderRadius.circular(16),
         ),
       ),

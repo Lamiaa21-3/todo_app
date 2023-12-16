@@ -11,7 +11,7 @@ class TaskModel extends HiveObject {
   @HiveField(2)
   final String date;
   @HiveField(3)
-  final int color;
+   int color;
 
   TaskModel(
       {required this.title,
