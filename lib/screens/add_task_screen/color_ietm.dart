@@ -11,7 +11,7 @@ class ColorIetm extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: color,
 
-      radius: 22,
+      radius: 29,
 
     );
   }

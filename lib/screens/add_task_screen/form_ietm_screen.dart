@@ -12,6 +12,7 @@ import 'add_task_container_date.dart';
 import 'add_task_container_row.dart';
 import 'add_task_text.dart';
 import 'color_ietm.dart';
+import 'list_view.dart';
 class FormIetmScreen extends StatefulWidget {
   const FormIetmScreen({Key? key}) : super(key: key);
 
@@ -183,46 +184,4 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
     );
   }
 }
-class ListViewIetm extends StatefulWidget {
-  const ListViewIetm({Key? key}) : super(key: key);
 
-  @override
-  State<ListViewIetm> createState() => _ListViewIetmState();
-}
-
-class _ListViewIetmState extends State<ListViewIetm> {
-  List<Color> colors = [
-    Color(0xFFFF4666),
-    Color(0xFF66CC41),
-    Color(0xFF41CCA7),
-    Color(0xFF4181CC),
-    Color(0xFFCC8441),
-    Color(0xFF9741CC),
-  ];
-  int currentIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 24,
-      child: ListView.builder(
-          itemCount: colors.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index){
-            return GestureDetector(
-              onTap: (){
-                currentIndex= index;
-                BlocProvider.of<AddTaskCubit>(context).color = colors[index];
-                setState(() {
-
-                });
-                print('accccccccccctive');
-
-              },
-              child: ColorIetm(
-                colorActive: currentIndex == index, color: colors[index],
-              ),
-            );
-          }),
-    );
-  }
-}

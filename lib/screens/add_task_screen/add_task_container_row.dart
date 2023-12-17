@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class AddTaskContainerRow extends StatelessWidget {
+class AddTaskContainerRow extends StatefulWidget {
   const AddTaskContainerRow({Key? key}) : super(key: key);
 
   @override
+  State<AddTaskContainerRow> createState() => _AddTaskContainerRowState();
+}
+
+class _AddTaskContainerRowState extends State<AddTaskContainerRow> {
+  TimeOfDay dateTime = TimeOfDay.now();
+
+  @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       child: Row(
         children: [
           Padding(
-            padding:  EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(left: 20),
             child: Text(
-              '09:33 PM',
+             '${dateTime.hour} : ${dateTime.minute}',
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Lato',
@@ -19,7 +26,12 @@ class AddTaskContainerRow extends StatelessWidget {
             ),
           ),
           Spacer(),
-          IconButton(onPressed: (){}, icon: Icon(Icons.timer_outlined),),
+          IconButton(
+            onPressed: () {
+              showTimeAndDatePicker(context);
+            },
+            icon: Icon(Icons.timer_outlined),
+          ),
         ],
       ),
       width: 150,
@@ -32,5 +44,16 @@ class AddTaskContainerRow extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showTimeAndDatePicker(BuildContext context) {
+    showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    ).then((value) {
+      setState(() {
+        dateTime = value! ;
+      });
+    });
   }
 }

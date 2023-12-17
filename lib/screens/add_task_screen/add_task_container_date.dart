@@ -1,16 +1,31 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
-class AddTaskContainerDate extends StatelessWidget {
-  const AddTaskContainerDate({Key? key}) : super(key: key);
+import 'package:intl/intl.dart';
+
+class AddTaskContainerDate extends StatefulWidget {
+  AddTaskContainerDate({Key? key}) : super(key: key);
+
+  @override
+  State<AddTaskContainerDate> createState() => _AddTaskContainerDateState();
+}
+
+class _AddTaskContainerDateState extends State<AddTaskContainerDate> {
+  List<DateTime?> _dates = [];
+
+  DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return   Container(
+    return Container(
       child: Row(
         children: [
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              '9/7/2023',
+              DateFormat.yMEd()
+
+              // displaying formatted date
+                  .format(dateTime),
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Lato',
@@ -19,7 +34,17 @@ class AddTaskContainerDate extends StatelessWidget {
           ),
           Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDatePicker(context: context,
+                  initialDate:DateTime.now(),
+                  firstDate:DateTime(2000),
+                  lastDate:DateTime(2027),
+              ).then((value){
+               setState(() {
+                 dateTime= value!;
+               });
+              });
+            },
             icon: Icon(Icons.date_range),
           ),
         ],
@@ -36,3 +61,5 @@ class AddTaskContainerDate extends StatelessWidget {
     );
   }
 }
+// var currentDate = DateTime.now();
+// var formatedDate = DateFormat.yMd().format(currentDate);

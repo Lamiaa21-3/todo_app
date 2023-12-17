@@ -34,13 +34,16 @@ class AddTaskScreen extends StatelessWidget {
         ),
       ),
       body:
-         ModalProgressHUD(
-              inAsyncCall:  false ,
-              child: SingleChildScrollView(
-                child: FormIetmScreen(),
-              )
+         Padding(
+           padding: const EdgeInsets.all(12.0),
+           child: ModalProgressHUD(
+                inAsyncCall:  false ,
+                child: SingleChildScrollView(
+                  child: FormIetmScreen(),
+                )
 
       ),
+         ),
     );
   }
 }
