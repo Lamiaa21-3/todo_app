@@ -25,7 +25,7 @@ class _ListViewIetmState extends State<ListViewIetm> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 44,
+      height: 2*30,
       child: ListView.builder(
           itemCount: colors.length,
           scrollDirection: Axis.horizontal,
@@ -41,7 +41,7 @@ class _ListViewIetmState extends State<ListViewIetm> {
 
               },
               child: ColorIetm(
-                colorActive: currentIndex == index, color: colors[index],
+                colorActive: currentIndex == index, color: colors[index], isActive: currentIndex==index,
               ),
             );
           }),

@@ -26,6 +26,7 @@ class _ContainerIetmState extends State<ContainerIetm> {
   // final String mainText;
   //bool isCompleted = false;
   String? title, subTitle;
+  bool selectedColor = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,39 +44,61 @@ class _ContainerIetmState extends State<ContainerIetm> {
                   children: [
                     ContainerIetmColumn(
                       text: 'Task Completed ',
-                      color: Color(0xFF8875FF),
+                      color:selectedColor == true? Color(0xFF8875FF): Color(0xFFE57373),
                       onTapContaoner: () {
                         setState(() {
+                          selectedColor= true;
                           widget.taskModel.isCompleted = true;
+
                           widget.taskModel.save();
                           Navigator.pop(context);
+
                         });
+                        selectedColor= false;
                       },
                     ),
                     ContainerIetmColumn(
                       text: 'Edit Task ',
-                      color: Color(0xFF8875FF),
+                      color:selectedColor == true? Color(0xFFE57373): Color(0xFFE57373),
                       onTapContaoner: () {
+                        setState(() {
+                          selectedColor= true;
+                        });
+
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => EditScreen(
                                       taskModel: widget.taskModel,
                                     )));
+                        selectedColor=false;
                       },
                     ),
                     ContainerIetmColumn(
                         text: 'Delete Task',
-                        color: Color(0xFFE57373),
+                        color:selectedColor == true? Color(0xFFE57373): Color(0xFFE57373),
                         onTapContaoner: () {
+                          setState(() {
+                            selectedColor= true;
+                          });
+
                           widget.taskModel.delete();
                           BlocProvider.of<TaskCubit>(context).fetchAllTasks();
+                          selectedColor=false;
                         }),
                     ContainerIetmColumn(
                         text: 'Cancel ',
-                        color: Color(0xFF8875FF),
+
+                        color:selectedColor == true? Color(0xFFE57373): Color(0xFFE57373),
                         onTapContaoner: () {
+
+
                           Navigator.pop(context);
+                          setState(() {
+                            selectedColor= true;
+                          });
+                          selectedColor=false;
                         }),
                   ],
                 ),

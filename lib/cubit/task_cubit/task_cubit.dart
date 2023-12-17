@@ -10,6 +10,7 @@ import '../../constants/constants.dart';
 class TaskCubit extends Cubit<TaskStates>{
   TaskCubit() : super(TaskInitialState());
   List<TaskModel> ? tasks;
+  bool isSlected = false;
  fetchAllTasks()
  {
 
@@ -19,5 +20,8 @@ class TaskCubit extends Cubit<TaskStates>{
      emit(TaskSucessState());
 
  }
+selectedColor(){
+  isSlected = true;
 
+}
 }

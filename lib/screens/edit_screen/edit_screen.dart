@@ -12,30 +12,38 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  String ? editTitle,editSubTitile;
+  String? editTitle, editSubTitile;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Screen '),
-        actions: [
-          IconButton(onPressed: (){
-            widget.taskModel.title = editTitle ?? widget.taskModel.title;
-            widget.taskModel.subTitle = editSubTitile ?? widget.taskModel.subTitle;
-            widget.taskModel.save();
-            Navigator.pop(context);
-          },icon: Icon(Icons.check),),
-        ],
-        leading:IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios),)
-
-      ),
+          title: Text('Edit Screen '),
+          actions: [
+            IconButton(
+              onPressed: () {
+                widget.taskModel.title = editTitle ?? widget.taskModel.title;
+                widget.taskModel.subTitle =
+                    editSubTitile ?? widget.taskModel.subTitle;
+                widget.taskModel.save();
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.check),
+            ),
+          ],
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios),
+          )),
       body: Padding(
         padding: const EdgeInsets.only(top: 90),
         child: Column(
           children: [
             TextFormFieldComponent(
-              onChanged: (value){
-                editTitle=value;
+              onChanged: (value) {
+                editTitle = value;
               },
 
               // controller: taskController,
@@ -45,8 +53,8 @@ class _EditScreenState extends State<EditScreen> {
               height: 20,
             ),
             TextFormFieldComponent(
-              onChanged: (value){
-                editSubTitile=value;
+              onChanged: (value) {
+                editSubTitile = value;
               },
 
               // controller: taskController,

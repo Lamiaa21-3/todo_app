@@ -166,7 +166,7 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
                         var  taskModel = TaskModel(title: title!,
                             subTitle: subTitile!,
                             date: formatedDate,
-                            color: Colors.blue.value, isCompleted: false);
+                            color: Colors.blue.value, isCompleted: false, );
                         BlocProvider.of<AddTaskCubit>(context)
                             .addTask(taskModel);
                       } else {
