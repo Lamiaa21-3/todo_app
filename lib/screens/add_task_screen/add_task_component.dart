@@ -9,7 +9,7 @@ class TextFormFieldComponent extends StatelessWidget {
 
       this.suffixIconButton,
       this.function,
-      this.onTap, this.onSaved})
+      this.onTap, this.onSaved, this.onChanged})
       : super(key: key);
   final String label;
   final IconData? suffixIconButton;
@@ -17,11 +17,13 @@ class TextFormFieldComponent extends StatelessWidget {
   final void Function()? onTap;
  // TextEditingController? controller;
   final void Function(String?)? onSaved ;
+  final void Function(String)? onChanged;
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged:onChanged ,
       validator: (value){
         if(value?.isEmpty ?? true)
           {

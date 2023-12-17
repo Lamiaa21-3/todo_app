@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/cubit/add_task_cubit/add_task_cubit.dart';
 import 'package:todo/cubit/task_cubit/task_cubit.dart';
+import 'package:todo/screens/add_task_screen/add_task_screen.dart';
 
 import '../../components/text_main.dart';
 import '../../components/text_middle.dart';
 import '../../components/text_small.dart';
 import '../../models/task_models.dart';
 import '../create_task_details/container_ietm_column.dart';
+import '../edit_screen/edit_screen.dart';
 
 class ContainerIetm extends StatefulWidget {
   ContainerIetm({
@@ -23,6 +25,7 @@ class ContainerIetm extends StatefulWidget {
 class _ContainerIetmState extends State<ContainerIetm> {
   // final String mainText;
   //bool isCompleted = false;
+  String? title, subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +45,29 @@ class _ContainerIetmState extends State<ContainerIetm> {
                       text: 'Task Completed ',
                       color: Color(0xFF8875FF),
                       onTapContaoner: () {
-                      setState(() {
-                        widget.taskModel.isCompleted = true;
-                        widget.taskModel.save();
-                        Navigator.pop(context);
-                      });
-
+                        setState(() {
+                          widget.taskModel.isCompleted = true;
+                          widget.taskModel.save();
+                          Navigator.pop(context);
+                        });
+                      },
+                    ),
+                    ContainerIetmColumn(
+                      text: 'Edit Task ',
+                      color: Color(0xFF8875FF),
+                      onTapContaoner: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditScreen(
+                                      taskModel: widget.taskModel,
+                                    )));
                       },
                     ),
                     ContainerIetmColumn(
                         text: 'Delete Task',
                         color: Color(0xFFE57373),
                         onTapContaoner: () {
-
                           widget.taskModel.delete();
                           BlocProvider.of<TaskCubit>(context).fetchAllTasks();
                         }),
@@ -99,25 +112,21 @@ class _ContainerIetmState extends State<ContainerIetm> {
                 ),
                 new RotatedBox(
                     quarterTurns: 3,
-                    child: widget.taskModel.isCompleted?
-                    Text(
-
-                      'Completed',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Lato',
-                          fontSize: 12),
-                    ):
-                    Text(
-
-                      'TODO',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Lato',
-                          fontSize: 16),
-                    )
-
-                )
+                    child: widget.taskModel.isCompleted
+                        ? Text(
+                            'Completed',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Lato',
+                                fontSize: 12),
+                          )
+                        : Text(
+                            'TODO',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Lato',
+                                fontSize: 16),
+                          ))
               ],
             ),
             TextMiddle(text: '${widget.taskModel.subTitle}'),
@@ -126,7 +135,7 @@ class _ContainerIetmState extends State<ContainerIetm> {
         width: 375,
         height: 128,
         decoration: BoxDecoration(
-          color:Color(widget.taskModel.color),
+          color: Color(widget.taskModel.color),
           borderRadius: BorderRadius.circular(16),
         ),
       ),

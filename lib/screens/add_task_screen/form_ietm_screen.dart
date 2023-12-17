@@ -53,6 +53,9 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
                 height: 10,
               ),
               TextFormFieldComponent(
+                onChanged: (value){
+                  title = value;
+                },
                 onSaved: (value) {
                   title = value;
                 },
@@ -69,6 +72,9 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
                 height: 10,
               ),
               TextFormFieldComponent(
+                onChanged: (value){
+                  subTitile = value;
+                },
                 onSaved: (value) {
                   subTitile = value;
                 },
