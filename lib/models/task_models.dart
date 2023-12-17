@@ -12,10 +12,14 @@ class TaskModel extends HiveObject {
   final String date;
   @HiveField(3)
    int color;
+  @HiveField(4)
+   bool isCompleted;
 
   TaskModel(
       {required this.title,
       required this.subTitle,
       required this.date,
-      required this.color});
+      required this.color,
+         this.isCompleted = false,
+      });
 }

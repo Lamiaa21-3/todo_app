@@ -18,8 +18,6 @@ class TaskCubit extends Cubit<TaskStates>{
      tasks = taskBox.values.toList();
      emit(TaskSucessState());
 
-
-
-
  }
+
 }

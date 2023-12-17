@@ -23,6 +23,7 @@ class FormIetmScreen extends StatefulWidget {
 class _FormIetmScreenState extends State<FormIetmScreen> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, subTitile;
+  //bool? isComplete;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -159,7 +160,7 @@ class _FormIetmScreenState extends State<FormIetmScreen> {
                         var  taskModel = TaskModel(title: title!,
                             subTitle: subTitile!,
                             date: formatedDate,
-                            color: Colors.blue.value);
+                            color: Colors.blue.value, isCompleted: false);
                         BlocProvider.of<AddTaskCubit>(context)
                             .addTask(taskModel);
                       } else {

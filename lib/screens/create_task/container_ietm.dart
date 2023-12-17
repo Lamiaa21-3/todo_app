@@ -9,16 +9,20 @@ import '../../components/text_small.dart';
 import '../../models/task_models.dart';
 import '../create_task_details/container_ietm_column.dart';
 
-class ContainerIetm extends StatelessWidget {
+class ContainerIetm extends StatefulWidget {
   ContainerIetm({
     Key? key,
     required this.taskModel,
   }) : super(key: key);
   final TaskModel taskModel;
 
+  @override
+  State<ContainerIetm> createState() => _ContainerIetmState();
+}
+
+class _ContainerIetmState extends State<ContainerIetm> {
   // final String mainText;
-  // final String subText;
-  // final Color color;
+  //bool isCompleted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +32,30 @@ class ContainerIetm extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return Container(
+                width: 375,
+                height: 240,
+                decoration: BoxDecoration(color: Color(0xFF424242)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ContainerIetmColumn(
                       text: 'Task Completed ',
                       color: Color(0xFF8875FF),
-                      onTapContaoner: () {},
+                      onTapContaoner: () {
+                      setState(() {
+                        widget.taskModel.isCompleted = true;
+                        widget.taskModel.save();
+                        Navigator.pop(context);
+                      });
+
+                      },
                     ),
                     ContainerIetmColumn(
                         text: 'Delete Task',
                         color: Color(0xFFE57373),
                         onTapContaoner: () {
 
-                          taskModel.delete();
+                          widget.taskModel.delete();
                           BlocProvider.of<TaskCubit>(context).fetchAllTasks();
                         }),
                     ContainerIetmColumn(
@@ -52,9 +66,6 @@ class ContainerIetm extends StatelessWidget {
                         }),
                   ],
                 ),
-                width: 375,
-                height: 240,
-                decoration: BoxDecoration(color: Color(0xFF424242)),
               );
             });
       },
@@ -64,7 +75,7 @@ class ContainerIetm extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             TextMain(
-              string: '${taskModel.title}',
+              string: '${widget.taskModel.title}',
             ),
             Row(
               children: [
@@ -73,7 +84,7 @@ class ContainerIetm extends StatelessWidget {
                   width: 9,
                 ),
                 TextDate(
-                  text: taskModel.date,
+                  text: widget.taskModel.date,
                 ),
                 SizedBox(
                   width: 90,
@@ -88,22 +99,34 @@ class ContainerIetm extends StatelessWidget {
                 ),
                 new RotatedBox(
                     quarterTurns: 3,
-                    child: new Text(
+                    child: widget.taskModel.isCompleted?
+                    Text(
+
+                      'Completed',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Lato',
+                          fontSize: 12),
+                    ):
+                    Text(
+
                       'TODO',
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Lato',
                           fontSize: 16),
-                    ))
+                    )
+
+                )
               ],
             ),
-            TextMiddle(text: '${taskModel.subTitle}'),
+            TextMiddle(text: '${widget.taskModel.subTitle}'),
           ]),
         ),
         width: 375,
         height: 128,
         decoration: BoxDecoration(
-          color:Color(taskModel.color),
+          color:Color(widget.taskModel.color),
           borderRadius: BorderRadius.circular(16),
         ),
       ),
