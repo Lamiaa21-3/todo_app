@@ -47,14 +47,14 @@ class _ContainerIetmState extends State<ContainerIetm> {
                       color:selectedColor == true? Color(0xFF8875FF): Color(0xFFE57373),
                       onTapContaoner: () {
                         setState(() {
-                          selectedColor= true;
+
                           widget.taskModel.isCompleted = true;
 
                           widget.taskModel.save();
                           Navigator.pop(context);
 
                         });
-                        selectedColor= false;
+
                       },
                     ),
                     ContainerIetmColumn(
